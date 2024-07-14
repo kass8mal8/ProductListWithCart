@@ -5,37 +5,40 @@ import removeIcon from "../assets/images/icon-remove-item.svg";
 
 const Cart = () => {
 	const { product } = useContext(ProductCartContext);
-	const [products, setProducts] = useState(Object.values(product));
-	const [isEmpty, setIsEmpty] = useState(false);
-	// console.log("products", product);
+	const [cartProducts, setCartProducts] = useState([]);
 
 	useEffect(() => {
-		Object.keys(product).length === 0 ? setIsEmpty(true) : setIsEmpty(false);
+		setCartProducts(Object.values(product));
 	}, [product]);
 
 	const handleFilter = (id) => {
-		setProducts(products.filter((product) => product.name !== id));
-	};
+		const updatedProducts = cartProducts.filter(
+			(product) => product.name !== id
+		);
 
-	console.log(products);
+		setCartProducts(updatedProducts);
+	};
 
 	return (
 		<div className="bg-white p-5 rounded-lg">
-			{isEmpty ? (
-				<>
+			{cartProducts.length === 0 ? (
+				<div>
 					<h1 className="text-red-700 font-extrabold text-3xl mb-5">
 						Your Cart(0)
 					</h1>
 
-					<img src={emptyCart} alt="empty illustration" />
-				</>
+					<img src={emptyCart} alt="empty illustration" className="mx-auto" />
+					<p className="text-rose-900 text-center mb-4">
+						Your added items will appear here
+					</p>
+				</div>
 			) : (
 				<>
 					<h1 className="text-red-700 font-extrabold text-3xl mb-5">
-						Your Cart ({products?.length})
+						Your Cart ({cartProducts.length})
 					</h1>
 					<div className="divide-y my-2">
-						{products?.map((item, index) => (
+						{cartProducts.map((item, index) => (
 							<div key={index} className="mb-4">
 								<section className="flex justify-between my-2">
 									<aside>
