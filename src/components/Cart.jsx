@@ -5,7 +5,7 @@ import { ProductCartContext } from "../App";
 const Cart = () => {
 	const { product } = useContext(ProductCartContext);
 	const [isEmpty, setIsEmpty] = useState(false);
-	console.log("products", product);
+	// console.log("products", product);
 
 	useEffect(() => {
 		Object.keys(product).length === 0 ? setIsEmpty(true) : setIsEmpty(false);
@@ -20,9 +20,9 @@ const Cart = () => {
 				</>
 			) : (
 				<>
-					{Object.values(product).map((item) => (
-						<div key={item.name}>
-							<p>{item.name}</p>
+					{Object.values(product).map((item, index) => (
+						<div key={index}>
+							<section className="flex justify-between"></section>
 						</div>
 					))}
 				</>

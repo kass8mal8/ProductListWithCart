@@ -7,7 +7,9 @@ const Desserts = () => {
 	const views = ["mobile", "tablet", "desktop"];
 	const [view, setView] = useState();
 	const [selectedProducts, setSelectedProducts] = useState([]);
-	const { product: productCart } = useContext(ProductCartContext);
+	const { setProduct, product } = useContext(ProductCartContext);
+
+	console.log("Selected products:", selectedProducts);
 
 	useEffect(() => {
 		const viewport = window.innerWidth;
@@ -17,16 +19,22 @@ const Desserts = () => {
 	}, [view]);
 
 	const handleSelect = (product) => {
-		if (selectedProducts.some((p) => p.name === product.name)) {
-			setSelectedProducts(
-				selectedProducts.filter((p) => p.name !== product.name)
-			);
+		const selectedProductIndex = selectedProducts.findIndex(
+			(p) => p.name === product.name
+		); // find the index of the selected product
+
+		if (selectedProductIndex !== -1) {
+			const updatedSelectedProducts = [...selectedProducts]; // update selected products
+			updatedSelectedProducts[selectedProductIndex].count++; // update count of selected products
+			setSelectedProducts(updatedSelectedProducts);
 		} else {
-			setSelectedProducts([...selectedProducts, product]);
+			setSelectedProducts([...selectedProducts, { ...product, count: 1 }]); // give selected products count of one
 		}
 	};
 
-	const x = Object.values(productCart);
+	useEffect(() => setProduct(selectedProducts));
+
+	console.log("Cart:", product);
 
 	return (
 		<div className="md:grid md:grid-cols-3 md:gap-4">
@@ -39,7 +47,12 @@ const Desserts = () => {
 							"border-2 border-rose-600"
 						} rounded-lg`}
 					/>
-					<Button product={product} handleSelect={handleSelect} index={index} />
+					<Button
+						product={product}
+						selectedProducts={selectedProducts}
+						setSelectedProducts={setSelectedProducts}
+						handleSelect={handleSelect}
+					/>
 					<div className="my-6 md:mt-8">
 						<p className="text-gray-400 font-semibold">{product.category}</p>
 						<p className="font-bold text-gray-700 text-lg">{product.name}</p>

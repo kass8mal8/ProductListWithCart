@@ -6,7 +6,6 @@ export const ProductCartContext = createContext();
 
 function App() {
 	const [product, setProduct] = useState({});
-	const [cart, setCart] = useState(null);
 	return (
 		<ProductCartContext.Provider value={{ product, setProduct }}>
 			<div className="md:flex md:w-[90%] md:justify-center h-max md:space-x-4 px-7 md:py-10 md:ml-20">
