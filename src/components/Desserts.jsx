@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import data from "../data.json";
-import { useState } from "react";
 import Button from "./Button";
+import { ProductCartContext } from "../App";
 
 const Desserts = () => {
 	const views = ["mobile", "tablet", "desktop"];
 	const [view, setView] = useState();
+	const [selectedProducts, setSelectedProducts] = useState([]);
+	const { product: productCart } = useContext(ProductCartContext);
 
 	useEffect(() => {
 		const viewport = window.innerWidth;
@@ -14,15 +16,30 @@ const Desserts = () => {
 		else setView(views[2]);
 	}, [view]);
 
-	// console.log(views === Object.keys(data.forEach((x) => x.image)));
-	data.forEach((x) => console.log(Object.keys(x.image) === view));
+	const handleSelect = (product) => {
+		if (selectedProducts.some((p) => p.name === product.name)) {
+			setSelectedProducts(
+				selectedProducts.filter((p) => p.name !== product.name)
+			);
+		} else {
+			setSelectedProducts([...selectedProducts, product]);
+		}
+	};
+
+	const x = Object.values(productCart);
 
 	return (
 		<div className="md:grid md:grid-cols-3 md:gap-4">
-			{data.map((product) => (
-				<div key={product.name} className="relative">
-					<img src={product.image.mobile} className="rounded-lg" />
-					<Button product={product} />
+			{data.map((product, index) => (
+				<div key={index} className="relative">
+					<img
+						src={product.image[view]}
+						className={`${
+							selectedProducts.some((p) => p.name === product.name) &&
+							"border-2 border-rose-600"
+						} rounded-lg`}
+					/>
+					<Button product={product} handleSelect={handleSelect} index={index} />
 					<div className="my-6 md:mt-8">
 						<p className="text-gray-400 font-semibold">{product.category}</p>
 						<p className="font-bold text-gray-700 text-lg">{product.name}</p>

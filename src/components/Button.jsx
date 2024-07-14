@@ -5,20 +5,28 @@ import addToCart from "../assets/images/icon-increment-quantity.svg";
 import decrementCart from "../assets/images/icon-decrement-quantity.svg";
 import { ProductCartContext } from "../App";
 
-const Button = ({ product }) => {
-	const [isSelected, setIsSelected] = useState(false);
+const Button = ({
+	product,
+	// isSelected,
+	// setIsSelected,
+	handleSelect,
+	// index,
+}) => {
 	const { setProduct, product: myproduct } = useContext(ProductCartContext);
-	console.log(Object.keys(myproduct));
+	console.log(Object.values(myproduct));
 
 	const handleClick = (e) => {
 		e.preventDefault();
 		const updatedProducts = { ...myproduct, [product.name]: product };
 		console.log("Updated", updatedProducts);
 		setProduct(updatedProducts);
+
+		handleSelect(product);
 	};
+	const [isSelected, setIsSelected] = useState(false);
 
 	if (myproduct) {
-		myproduct.forEach((product) => console.log(product));
+		Object.values(myproduct).forEach((product) => console.log(product));
 	}
 
 	return (
