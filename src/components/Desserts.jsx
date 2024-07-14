@@ -44,7 +44,7 @@ const Desserts = () => {
 						src={product.image[view]}
 						className={`${
 							selectedProducts.some((p) => p.name === product.name) &&
-							"border-2 border-rose-600"
+							"border-2 border-red-700"
 						} rounded-lg`}
 					/>
 					<Button
@@ -56,7 +56,7 @@ const Desserts = () => {
 					<div className="my-6 md:mt-8">
 						<p className="text-gray-400 font-semibold">{product.category}</p>
 						<p className="font-bold text-gray-700 text-lg">{product.name}</p>
-						<p className="text-rose-900 font-bold text-lg">${product.price}</p>
+						<p className="text-red-900 font-bold text-lg">${product.price}</p>
 					</div>
 				</div>
 			))}
