@@ -33,8 +33,8 @@ const Button = ({
 	return (
 		<div
 			className={`${
-				selected ? "bg-red-700 " : "bg-white"
-			}  border w-1/2 md:w-3/5 shadow-md border-gray-300 rounded-3xl absolute -mt-5 ml-20 md:ml-12`}
+				selected ? "bg-red-700 shadow-red-200  border-none" : "bg-white"
+			} hover:border-red-700 hover:text-red-700 duration-300 border-2 w-1/2 md:w-3/5 shadow-md border-gray-300 rounded-3xl absolute -mt-5 ml-20 md:ml-12`}
 		>
 			{selected ? (
 				<div className="flex w-full items-center text-center justify-between space-x-2 py-2 px-2 font-semibold">

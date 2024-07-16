@@ -23,19 +23,15 @@ const Desserts = () => {
 			(p) => p.name === product.name
 		); // find the index of the selected product
 
-		const updatedSelectedProducts = [...selectedProducts]; // update selected products
 		if (selectedProductIndex !== -1) {
+			const updatedSelectedProducts = [...selectedProducts]; // update selected products
 			updatedSelectedProducts[selectedProductIndex].count++;
-			updatedSelectedProducts[selectedProductIndex].total =
-				updatedSelectedProducts[selectedProductIndex].count * product.price;
-			setSelectedProducts(updatedSelectedProducts);
 		} else {
 			setSelectedProducts([
 				...selectedProducts,
 				{
 					...product,
 					count: 1,
-					total: product.price,
 				},
 			]); // give selected products count of one
 		}
@@ -43,19 +39,19 @@ const Desserts = () => {
 
 	useEffect(() => setProduct(selectedProducts));
 
-	console.log("Cart:", product);
-
 	return (
 		<div className="md:grid md:grid-cols-3 md:gap-4">
 			{data.map((product, index) => (
 				<div key={index} className="relative">
-					<img
-						src={product.image[view]}
-						className={`${
-							selectedProducts.some((p) => p.name === product.name) &&
-							"border-2 border-red-700"
-						} rounded-lg`}
-					/>
+					<aside className="overflow-hidden rounded-lg">
+						<img
+							src={product.image[view]}
+							className={`${
+								selectedProducts.some((p) => p.name === product.name) &&
+								"border-2 border-red-700"
+							} rounded-lg hover:scale-110 duration-300`}
+						/>
+					</aside>
 					<Button
 						product={product}
 						selectedProducts={selectedProducts}
