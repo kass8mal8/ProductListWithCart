@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import data from "../data.json";
 import Button from "./Button";
 import { ProductCartContext } from "../App";
@@ -7,22 +7,21 @@ const Desserts = () => {
 	const views = ["mobile", "tablet", "desktop"];
 	const [view, setView] = useState();
 	const [selectedProducts, setSelectedProducts] = useState([]);
-	const { setProduct, product } = useContext(ProductCartContext);
-
-	console.log("Selected products:", selectedProducts);
+	const { setProduct } = useContext(ProductCartContext);
 
 	useEffect(() => {
 		const viewport = window.innerWidth;
 		if (viewport <= 425) setView(views[0]);
 		else if (viewport > 425 && viewport < 768) setView(views[1]);
 		else setView(views[2]);
-	}, [view]);
+	}, [views]);
 
 	const handleSelect = (product) => {
 		const selectedProductIndex = selectedProducts.findIndex(
 			(p) => p.name === product.name
-		); // find the index of the selected product
+		); // find the index of the product passed in the method
 
+		// if the image is not among selected products then add it to the selected products array else increment the selected product count
 		if (selectedProductIndex !== -1) {
 			const updatedSelectedProducts = [...selectedProducts]; // update selected products
 			updatedSelectedProducts[selectedProductIndex].count++;
@@ -30,10 +29,10 @@ const Desserts = () => {
 			setSelectedProducts([
 				...selectedProducts,
 				{
-					...product,
-					count: 1,
+					...product, // update selected product
+					count: 1, // give selected products count of one
 				},
-			]); // give selected products count of one
+			]);
 		}
 	};
 

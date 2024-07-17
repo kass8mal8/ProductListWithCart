@@ -13,6 +13,11 @@ const Cart = () => {
 		setCartProducts(Object.values(product));
 	}, [product]);
 
+	const handleClear = () => {
+		setProduct([]);
+		setCartProducts([]);
+	};
+
 	useEffect(() => {
 		const updatedProductObject = {};
 		cartProducts.forEach((product) => {
@@ -47,7 +52,8 @@ const Cart = () => {
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
 				products={cartProducts}
-				totalArr={totalArr}
+				totalArr={totalArr || []}
+				handleClear={handleClear}
 			/>
 			{cartProducts.length === 0 ? (
 				<div>

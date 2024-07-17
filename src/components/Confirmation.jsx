@@ -2,10 +2,15 @@
 import { useEffect, useRef } from "react";
 import orderConfirmed from "../assets/images/icon-order-confirmed.svg";
 
-const Confirmation = ({ isOpen, setIsOpen, products, totalArr }) => {
+const Confirmation = ({
+	handleClear,
+	isOpen,
+	setIsOpen,
+	products,
+	totalArr,
+}) => {
 	const modalRef = useRef();
 	isOpen && modalRef.current.showModal();
-	console.log("Modal:", products);
 
 	useEffect(() => {
 		isOpen && modalRef.current.showModal();
@@ -70,12 +75,15 @@ const Confirmation = ({ isOpen, setIsOpen, products, totalArr }) => {
 					<aside className="flex justify-between pt-5 mb-2 items-center">
 						<p className="opacity-50 font-semibold">Order Total</p>
 						<p className="font-extrabold text-3xl">
-							${totalArr.reduce((a, b) => a + b)}
+							${totalArr.length && totalArr.reduce((a, b) => a + b)}
 						</p>
 					</aside>
 				</aside>
 
-				<button className="bg-red-700 text-white capitalize w-full p-3 rounded-3xl my-3 mt-5">
+				<button
+					className="bg-red-700 text-white capitalize w-full p-3 rounded-3xl my-3 mt-5"
+					onClick={handleClear}
+				>
 					Start new order
 				</button>
 			</dialog>
