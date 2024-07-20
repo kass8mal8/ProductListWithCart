@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
-import data from "../data.json";
+import data from "../assets/data.json";
 import Button from "./Button";
 import { ProductCartContext } from "../App";
 
@@ -37,6 +38,7 @@ const Desserts = () => {
 	};
 
 	useEffect(() => setProduct(selectedProducts));
+	console.log(data);
 
 	return (
 		<div className="md:grid md:grid-cols-3 md:gap-4">

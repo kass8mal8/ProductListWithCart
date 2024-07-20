@@ -6,7 +6,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ["redhat", ...defaultTheme.fontFamily.sans],
+				sans: ["redhatnormal", "redhatbold", ...defaultTheme.fontFamily.sans],
 			},
 		},
 	},

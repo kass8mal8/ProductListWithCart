@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: "redhat";
+	font-family: "redhatnormal";
 	src: url(./assets/fonts/RedHatText-Regular.ttf);
-	font-weight: 500;
+	font-weight: bolder;
+	font-style: normal;
+}
+@font-face {
+	font-family: "redhatbold";
+	src: url(./assets/fonts/RedHatText-Bold.ttf);
+	font-weight: 900;
 	font-style: normal;
 }
 

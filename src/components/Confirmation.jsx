@@ -36,7 +36,7 @@ const Confirmation = ({
 			onClick={handleClose}
 		>
 			<img src={orderConfirmed} alt="orderIconConfurmed" className="my-3" />
-			<h1 className="font-extrabold text-3xl">Order Confirmed</h1>
+			<h1 className="font-extrabold text-4xl">Order Confirmed</h1>
 			<p className="font-semibold opacity-40 text-gray-700 mb-7">
 				We hope yo enjoy your food!
 			</p>
